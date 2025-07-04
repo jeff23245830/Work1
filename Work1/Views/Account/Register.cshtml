@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "_LiteraCss";
+}
+
+@model ViewModel.RegisterViewModel
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4" style="max-width: 450px; width: 100%;">
+        <div class="card-body">
+            <div class="mb-3">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-dark"><i class="bi bi-arrow-left"></i></a>
+            </div>
+            <h2 class="card-title text-center mb-4">註冊</h2>
+            <hr />
+            <form asp-action="Register" asp-controller="Account" method="post"> @* **重要：asp-action 改為 Register** *@
+                <div asp-validation-summary="All" class="text-danger mb-3"></div> @* 改為 All，顯示所有模型錯誤和 Identity 錯誤 *@
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true" />
+                    <span asp-validation-for="Email" class="text-danger"></span>  
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" autocomplete="name" aria-required="true" />
+                    <span asp-validation-for="Name" class="text-danger"></span>  
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />  
+                    <span asp-validation-for="Password" class="text-danger"></span> 
+                </div>
+
+                <div class="mb-3"> @* **重要：新增 ConfirmPassword 欄位** *@
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>  
+                </div>
+
+                <div class="d-grid gap-2 mb-3">
+                    <button type="submit" class="btn btn-primary btn-lg">進行註冊</button>
+                </div>
+                
+                <div class="text-center  mt-3">
+                    <p>
+                        已經有帳戶了？ <a asp-action="Login" asp-controller="Account">登入</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

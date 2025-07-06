@@ -1,4 +1,11 @@
 ﻿
+@model ViewModel.CategoryViewModel
+@{
+    // 從 ViewModel 中獲取分頁資訊
+    var pageNumber = Model.PageNumber;
+    var totalPages = Model.TotalPages;
+    var pageSize = Model.PageSize; // 也可能需要 pageSize 來傳回給控制器
+}
 <div class="container">
     <div class="row pt-4 pb-3">
         <div class="col-6">
@@ -12,7 +19,7 @@
             </a>
         </div>
     </div>
-    <form asp-controller="Category" asp-action="Index"  method="post">
+    <form asp-controller="Category" asp-action="Index"  method="get">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -24,42 +31,73 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
-
-
+        <tbody> 
+        @foreach(var obj in Model.CategoryList)
+        {
             <tr>
+
                 <td>
-                    Name
+                    @obj.Name
                 </td>
                 <td>
-                    DisplayOrder
+                    @obj.OrderBy
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-primary" asp-controller="Category" asp-action="Edit" asp-route-Name="1"><i class="bi bi-pencil"></i> 修改</button>
+                    <a type="submit" class="btn btn-primary" asp-controller="Category" asp-action="Edit" asp-route-Id="@obj.Id"><i class="bi bi-pencil"></i> 修改</a>
                     <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> 刪除</button>
                 </td>
             </tr>
-
+        }  
         </tbody>
     </table>
     </form>
 </div>
- 
+
+
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+        @* 添加 justify-content-center 以讓分頁居中 *@ 
+        <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
+            @* 當前頁是第一頁時禁用 Previous 按鈕 *@
+            <a class="page-link"
+               asp-controller="Category"
+               asp-action="Index"
+               asp-route-pageNumber="@(pageNumber - 1)"
+               asp-route-pageSize="@pageSize" @* 確保傳遞 pageSize，如果需要保持每頁項目數不變 *@
+               aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == pageNumber ? "active" : "")">
+                @* 如果是當前頁，則添加 active class *@
+                <a class="page-link"
+                   asp-controller="Category"
+                   asp-action="Index"
+                   asp-route-pageNumber="@i"
+                   asp-route-pageSize="@pageSize">
+                    @* 確保傳遞 pageSize *@
+                    @i
+                </a>
+            </li>
+        }
+
+        <li class="page-item @(pageNumber >= totalPages ? "disabled" : "")">
+            @* 當前頁是最後一頁時禁用 Next 按鈕 *@
+            <a class="page-link"
+               asp-controller="Category"
+               asp-action="Index"
+               asp-route-pageNumber="@(pageNumber + 1)"
+               asp-route-pageSize="@pageSize" @* 確保傳遞 pageSize *@
+               aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
     </ul>
 </nav>
- 
+<div class="text-center mt-3">
+    @* 添加 mt-3 給一些上邊距 *@
+    顯示 @((pageNumber - 1) * pageSize + 1) - @(Math.Min(pageNumber * pageSize, Model.TotalItems)) 共 @Model.TotalItems 條記錄
+</div>

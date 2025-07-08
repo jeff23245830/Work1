@@ -21,9 +21,10 @@ namespace ViewModel
         public int Weight { get; set; }
         [DisplayName("產品圖片")]
         public string ImageUrl { get; set; }
+        
+        public Guid CategoryId { get; set; }
         [DisplayName("產品類別")]
-        public string CategoryId { get; set; }
-
+        public string CategoryName { get; set; }
         public int PageNumber { get; set; } // 當前頁碼
         public int PageSize { get; set; }   // 每頁顯示的項目數
         public int TotalPages { get; set; } // 總頁數

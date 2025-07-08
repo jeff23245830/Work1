@@ -9,6 +9,8 @@ namespace Service.Interfaces
 {
     public interface IProductService
     {
+        Task AddProduct(ProductViewModel model);
+        Task<ProductViewModel> UpdataProduct(ProductViewModel model);
         Task<ProductViewModel> GetProductById(Guid Id);
 
         Task<ProductViewModel> GetPagedProductssAsync(int pageNumber, int pageSize);

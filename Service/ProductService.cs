@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository;
+using Repository.Entities;
 using Repository.Interfaces;
 using Service.Interfaces;
 using System;
@@ -13,10 +14,15 @@ namespace Service
 {
     public class ProductService : IProductService
     {
+        
+
+
         private readonly IProductRepository _IProductRepository;
-        public ProductService(IProductRepository IProductRepository)
+        private readonly ICategoryRepository _ICategoryRepository;
+        public ProductService(IProductRepository IProductRepository, ICategoryRepository iCategoryRepository)
         {
             _IProductRepository = IProductRepository;
+            _ICategoryRepository = iCategoryRepository;
         }
 
         public async Task<ProductViewModel> GetProductById(Guid Id)
@@ -26,7 +32,8 @@ namespace Service
             {
                 Id = CC.Id,
                 Name = CC.Name,
-                CategoryId = CC.Category.Name,
+                CategoryId = CC.Category.Id,
+                CategoryName = CC.Category.Name,
                 Weight = CC.Weight,
                 Size = CC.Size,
                 Price = CC.Price,
@@ -67,6 +74,31 @@ namespace Service
             return viewModel;
         }
 
-        
+        public async Task AddProduct(ProductViewModel model)
+        {
+
+            var NewModel = new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = model.Name,
+                CategoryId = model.CategoryId,
+                Weight = model.Weight,
+                Size = model.Size,
+                Price = model.Price,
+                ImageUrl = model.ImageUrl,
+                IsAlready = true 
+            };
+
+            _IProductRepository.AddAsync(NewModel);
+            await _IProductRepository.SaveChangesAsync();
+             
+        }
+
+        public Task<ProductViewModel> UpdataProduct(ProductViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+         
     }
 }

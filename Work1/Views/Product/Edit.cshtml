@@ -1,6 +1,6 @@
 ﻿@model ViewModel.ProductViewModel
 <div class="container">
-    <form asp-action="Edit" asp-controller="Category" method="post">
+    <form asp-action="Edit" enctype="multipart/form-data" asp-controller="Product" method="post">
         <div class="row pt-4 pb-3">
 
             @if (Model == null)
@@ -22,6 +22,10 @@
                 <div hidden class="mb-3">
                     <label asp-for="Id" class="form-label"></label>
                     <input asp-for="Id" class="form-control" aria-required="true" />
+                </div>
+
+                <div class="col-2">
+                    <img class="mt-4" src="@Model.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
                 </div>
             }
 
@@ -54,11 +58,10 @@
             </select>
         </div>
         <div class="mb-3">
-            <label asp-for="ImageUrl" for="formFile" class="form-label">產品圖片</label>
-            <input asp-for="ImageUrl"  class="form-control" type="file" id="formFile">
-            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            <label asp-for="ImageUrl" class="p-0"></label>
+            <input type="file" name="file" asp-for="ImageUrl" class="form-control" />
         </div>
-
+        
         <div class="col-12">
             @if (Model == null)
             {

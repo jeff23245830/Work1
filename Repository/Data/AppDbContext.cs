@@ -59,7 +59,7 @@ namespace Repository.Data
                     Price = 100,
                     Size = "大",
                     Weight = 20,
-                    ImageUrl ="\\images\\1.jpg",
+                    ImageUrl ="\\Images\\Product\\1.jpg",
                     CreateTime = DateTime.Now,
                     IsAlready = true
                 }

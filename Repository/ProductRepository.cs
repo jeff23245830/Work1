@@ -19,9 +19,9 @@ namespace Repository
             _context = context;
         }
         // --- Create ---
-        public async Task AddAsync(Product category)
+        public async Task AddAsync(Product product)
         {
-            await _context.Products.AddAsync(category);
+            await _context.Products.AddAsync(product);
         }
 
         // --- Read ---
@@ -38,17 +38,17 @@ namespace Repository
 
 
         // --- Update ---
-        public void Update(Product category)
+        public void Update(Product product)
         {
-            _context.Products.Update(category); // Entity Framework 會追蹤變更，State 會設置為 Modified
+            _context.Products.Update(product); // Entity Framework 會追蹤變更，State 會設置為 Modified
             // 或者：
             // _context.Entry(category).State = EntityState.Modified;
         }
 
         // --- Delete ---
-        public void Delete(Product category)
+        public void Delete(Product product)
         {
-            _context.Products.Remove(category);
+            _context.Products.Remove(product);
         }
 
         // --- Save Changes ---

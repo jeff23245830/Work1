@@ -33,6 +33,15 @@ namespace Service
 
         }
 
+        public async Task DeletById(Guid Id)
+        {
+            var OldModel = await _CategoryRepository.GetByIdAsync(Id);
+
+            _CategoryRepository.Delete(OldModel);
+            await _CategoryRepository.SaveChangesAsync();
+             
+        }
+
         public async Task EditCategory(CategoryViewModel model)
         {
             var OldModel = await _CategoryRepository.GetByIdAsync(model.Id);

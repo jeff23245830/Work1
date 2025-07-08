@@ -10,6 +10,7 @@ namespace Service.Interfaces
     public interface IProductService
     {
         Task AddProduct(ProductViewModel model);
+        Task DeletProductById(Guid id);
         Task<ProductViewModel> UpdataProduct(ProductViewModel model);
         Task<ProductViewModel> GetProductById(Guid Id);
 

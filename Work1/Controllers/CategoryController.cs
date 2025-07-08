@@ -42,25 +42,56 @@ namespace Work1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAsync(CategoryViewModel model)
-        {  
-           
-            if(model.Id != Guid.Empty && model.Name != null )
-            { 
-                await _categoryService.EditCategory(model);
-                TempData["success"] = "類別更新成功";
-                return RedirectToAction("Index");
-            }
-            if(model.Name != null && model.OrderBy != null)
+        {
+            try
             {
-                await _categoryService.AddCategory(model);
-                TempData["success"] = "類別新增成功";
+                if (model.Id != Guid.Empty && model.Name != null)
+                {
+                    await _categoryService.EditCategory(model);
+                    TempData["success"] = "類別更新成功";
+                    return RedirectToAction("Index");
+                }
+                if (model.Name != null && model.OrderBy != null)
+                {
+                    await _categoryService.AddCategory(model);
+                    TempData["success"] = "類別新增成功";
+                    return RedirectToAction("Index");
+                }
+                TempData["error"] = "類別新增失敗";
                 return RedirectToAction("Index");
             }
-
-            TempData["error"] = "類別新增失敗";
-            return RedirectToAction("Index");
+            catch 
+            {
+                TempData["error"] = "類別新增失敗";
+                return RedirectToAction("Index");
+            }
+             
 
         }
+
+
+        #region API 
+
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            try
+            {
+                await _categoryService.DeletById(Id);
+                return Json(new { success = true, message = "刪除成功" });
+            }
+            catch {
+
+                return Json(new { success = false, message = "刪除失敗" });
+
+            }
+
+
+            
+        }
+
+
+        #endregion
+
 
     }
 }

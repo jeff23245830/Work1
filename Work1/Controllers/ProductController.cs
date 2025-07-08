@@ -44,8 +44,9 @@ namespace Work1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModel model ,IFormFile? file)
+        public async Task<ActionResult> Edit(ProductViewModel model ,IFormFile? file)
         {
+            //上傳檔案_WebHostEnvironment時屬於意外 因為沒Services沒有IFormFile
             try
             {
                 string wwwRootPath = _WebHostEnvironment.WebRootPath;
@@ -57,9 +58,9 @@ namespace Work1.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    model.CategoryId = new Guid("00000000-0000-0000-0000-000000000001");
+                   
                     model.ImageUrl = @"\Images\Product\" + fileName;
-                    _ProductService.AddProduct(model);
+                    await _ProductService.AddProduct(model);
                     TempData["success"] = "產品新增成功";
                     return RedirectToAction("ProductList");
                 }
@@ -71,9 +72,28 @@ namespace Work1.Controllers
             }
            
         }
-        public ActionResult Remove()
+
+        #region API 
+
+        public async Task<IActionResult> Delete(Guid Id)
         {
-            return View();
+            try
+            {
+                await _ProductService.DeletProductById(Id);
+                return Json(new { success = true, message = "刪除成功" });
+            }
+            catch
+            {
+                return Json(new { success = false, message = "刪除失敗" });
+
+            }
+
+
+
         }
+
+
+        #endregion
+        
     } 
 }

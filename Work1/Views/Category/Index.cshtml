@@ -52,7 +52,7 @@
                 </td>
                 <td>
                     <a type="submit" class="btn btn-primary" asp-controller="Category" asp-action="Edit" asp-route-Id="@obj.Id"><i class="bi bi-pencil"></i> 修改</a>
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> 刪除</button>
+                            <a class="btn btn-danger" onclick="Delete('@Url.Action("Delete", "Category", new { id = obj.Id })')"><i class="bi bi-trash"></i> 刪除</a>
                 </td>
             </tr>
         }  
@@ -109,3 +109,5 @@
     @* 添加 mt-3 給一些上邊距 *@
     顯示 @((pageNumber - 1) * pageSize + 1) - @(Math.Min(pageNumber * pageSize, Model.TotalItems)) 共 @Model.TotalItems 條記錄
 </div>
+
+<script src="~/js/SweetA2.js"></script>

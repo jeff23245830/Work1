@@ -11,12 +11,17 @@ namespace Service.Interfaces
 {
     public interface ICategoryService
     {
-
+         
         Task AddCategory(CategoryViewModel model);
 
         Task EditCategory(CategoryViewModel model);
 
+
+
         Task<CategoryViewModel> GetCategoryById(Guid Id);
+
+
+        Task DeletById(Guid Id);
 
         Task<CategoryViewModel> GetPagedCategoriesAsync(int pageNumber, int pageSize);
     }

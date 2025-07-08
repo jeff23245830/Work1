@@ -77,6 +77,7 @@ namespace Service
         public async Task AddProduct(ProductViewModel model)
         {
 
+            model.CategoryId = new Guid("00000000-0000-0000-0000-000000000001");
             var NewModel = new Product
             {
                 Id = Guid.NewGuid(),
@@ -99,6 +100,11 @@ namespace Service
             throw new NotImplementedException();
         }
 
-         
+        public async Task DeletProductById(Guid id)
+        {
+            var OldModel = await _IProductRepository.GetByIdAsync(id); 
+            _IProductRepository.Delete(OldModel);
+            await _IProductRepository.SaveChangesAsync();
+        }
     }
 }

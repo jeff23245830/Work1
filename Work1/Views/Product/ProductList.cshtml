@@ -25,7 +25,7 @@
             </a>
         </div>
     </div>
-    <form asp-controller="Product" asp-action="Index" method="get">
+    <form asp-controller="Product" asp-action="ProductList" method="get">
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -55,7 +55,7 @@
                         </td>
                         <td>
                             <a type="submit" class="btn btn-primary" asp-controller="Product" asp-action="Edit" asp-route-Id="@obj.Id"><i class="bi bi-pencil"></i> 修改</a>
-                            <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i> 刪除</button>
+                            <a class="btn btn-danger" onclick="Delete('@Url.Action("Delete", "Product", new { id = obj.Id })')"><i class="bi bi-trash"></i> 刪除</a>
                         </td>
                     </tr>
                 }
@@ -112,3 +112,4 @@
     @* 添加 mt-3 給一些上邊距 *@
     顯示 @((pageNumber - 1) * pageSize + 1) - @(Math.Min(pageNumber * pageSize, Model.TotalItems)) 共 @Model.TotalItems 條記錄
 </div>
+<script src="~/js/SweetA2.js"></script>

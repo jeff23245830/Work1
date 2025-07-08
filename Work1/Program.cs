@@ -18,10 +18,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 #region Repository 註冊
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 #endregion
 
 #region Service 註冊
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 #endregion
 
 
@@ -42,9 +44,25 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+/*
+app.UseEndpoints(endpoints =>
+{
+     endpoints.MapControllerRoute(
+        name: "AdminArea", // 給這個路由一個名稱
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}" 
+    );
 
+    // 你的默認路由 (通常放在最後)
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+});
+*/
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+
 
 app.Run();

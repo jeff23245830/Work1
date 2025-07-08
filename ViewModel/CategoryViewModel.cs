@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,9 +13,11 @@ namespace ViewModel
     public class CategoryViewModel
     {
 
-        public Guid Id { get; set; } 
+        public Guid Id { get; set; }
+        [Required(ErrorMessage = "請填寫類別名稱")]
         [DisplayName("類別名稱")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "請填寫類別排序")]
         [DisplayName("類別排序")]
         public int OrderBy { get; set; }
 

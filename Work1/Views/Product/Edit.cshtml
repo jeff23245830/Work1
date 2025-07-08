@@ -1,0 +1,83 @@
+﻿@model ViewModel.ProductViewModel
+<div class="container">
+    <form asp-action="Edit" asp-controller="Category" method="post">
+        <div class="row pt-4 pb-3">
+
+            @if (Model == null)
+            {
+                <div class="col-6">
+                    <h2 class="text-primary">
+                        新增產品
+                    </h2>
+                </div>
+            }
+            else
+            {
+                <div class="col-6">
+                    <h2 class="text-primary">
+                        修改產品
+                    </h2>
+                </div>
+
+                <div hidden class="mb-3">
+                    <label asp-for="Id" class="form-label"></label>
+                    <input asp-for="Id" class="form-control" aria-required="true" />
+                </div>
+            }
+
+        </div>
+        
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" aria-required="true" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" aria-required="true" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Size" class="form-label"></label>
+            <input asp-for="Size" class="form-control" aria-required="true" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Weight" class="form-label"></label>
+            <input asp-for="Weight" class="form-control" aria-required="true" />
+        </div>
+        <div class="mb-3">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>產品類別</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImageUrl" for="formFile" class="form-label">產品圖片</label>
+            <input asp-for="ImageUrl"  class="form-control" type="file" id="formFile">
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="col-12">
+            @if (Model == null)
+            {
+                <button type="submit" class="btn btn-primary">新增</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">修改</button>
+            }
+
+            <a class="btn btn-light" asp-controller="Product" asp-action="ProductList">返回</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

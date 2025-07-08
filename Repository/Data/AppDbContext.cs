@@ -16,7 +16,10 @@ namespace Repository.Data
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
 
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,7 +37,55 @@ namespace Repository.Data
                 new Category { Id = new Guid("00000000-0000-0000-0000-000000000009"), Name = "第9個類別", OrderBy = 9 },
                 new Category { Id = new Guid("00000000-0000-0000-0000-000000000010"), Name = "第10個類別", OrderBy = 10 }
                 );
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                    Account = "admin@admin.com",
+                    Name = "Admin",
+                    Password = "1224",
+                    Email = "admin@admin.com",
+                    CreatedTime = DateTime.Now,
+                    RoleId = new Guid("00000000-0000-0000-0000-000000000001"), 
+                }
+               );
 
+            modelBuilder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000001"), 
+                    Name = "好喝的水",
+                    CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
+                    Price = 100,
+                    Size = "大",
+                    Weight = 20,
+                    ImageUrl ="\\images\\1.jpg",
+                    CreateTime = DateTime.Now,
+                    IsAlready = true
+                }
+               );
+
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000001"), 
+                    Name = "Admin",
+                    Level = 1
+                },
+                new Role
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                    Name = "Manager",
+                    Level = 2
+                },
+                new Role
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                    Name = "User",
+                    Level = 3
+                }
+               );
 
         }          
     }

@@ -14,50 +14,51 @@ namespace Work1.Controllers
         }
 
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> IndexAsync(int pageNumber = 1, int pageSize = 5)
+        [HttpGet]
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5)
         {
 
             var viewModel = await _categoryService.GetPagedCategoriesAsync(pageNumber, pageSize);
             return View(viewModel);
         }
 
-        [HttpPost("Index")]
-        public async Task<IActionResult> IndexAsync()
+        [HttpPost]
+        public async Task<IActionResult> Index()
         { 
             return View();
         }
 
-        [HttpGet("Edit")]
-        public async Task<IActionResult> Edit(CategoryViewModel model)
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid Id)
         {
-            if (model.Id != Guid.Empty)
+            if (Id != Guid.Empty)
             {
-                var viewModel = await _categoryService.GetCategoryById(model.Id);
+                var viewModel = await _categoryService.GetCategoryById(Id);
                 return View(viewModel);
             }
-             
             return View();
         }
 
-        [HttpPost("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditAsync(CategoryViewModel model)
         {  
-            if(model.Id != Guid.Empty)
-            {
-
+           
+            if(model.Id != Guid.Empty && model.Name != null )
+            { 
                 await _categoryService.EditCategory(model);
-
                 TempData["success"] = "類別更新成功";
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            await _categoryService.AddCategory(model);
+            if(model.Name != null && model.OrderBy != null)
+            {
+                await _categoryService.AddCategory(model);
+                TempData["success"] = "類別新增成功";
+                return RedirectToAction("Index");
+            }
 
-            TempData["success"] = "類別新增成功";
-
-            return RedirectToAction(nameof(Index));
+            TempData["error"] = "類別新增失敗";
+            return RedirectToAction("Index");
 
         }
 

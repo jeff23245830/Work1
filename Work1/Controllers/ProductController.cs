@@ -1,83 +1,56 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service;
+using Service.Interfaces;
+using ViewModel;
 
 namespace Work1.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: ProductController
+        private readonly IProductService _ProductService;
+
+        public ProductController(IProductService ProductService)
+        {
+            _ProductService = ProductService;
+        }
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: ProductController/Details/5
+         
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProductController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> ProductListAsync(int pageNumber = 1, int pageSize = 5)
         {
+            var viewModel = await _ProductService.GetPagedProductssAsync(pageNumber, pageSize);
+            return View(viewModel);
+        }
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid Id)
+        {
+
+            if (Id != Guid.Empty)
+            {
+                var viewModel = await _ProductService.GetProductById(Id);
+                return View(viewModel);
+            }
             return View();
         }
 
-        // POST: ProductController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Edit(ProductViewModel model)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
+            return View();
+        }
+        public ActionResult Remove()
         {
             return View();
         }
-
-        // POST: ProductController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+    } 
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
@@ -11,9 +12,11 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250708074221_qa1")]
+    partial class qa1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,9 +122,6 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsAlready")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -147,9 +147,8 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CreateTime = new DateTime(2025, 7, 8, 15, 59, 46, 747, DateTimeKind.Local).AddTicks(9223),
+                            CreateTime = new DateTime(2025, 7, 8, 15, 42, 21, 288, DateTimeKind.Local).AddTicks(9064),
                             ImageUrl = "\\images\\1.jpg",
-                            IsAlready = true,
                             Name = "好喝的水",
                             Price = 100,
                             Size = "大",
@@ -237,7 +236,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             Account = "admin@admin.com",
-                            CreatedTime = new DateTime(2025, 7, 8, 15, 59, 46, 747, DateTimeKind.Local).AddTicks(9201),
+                            CreatedTime = new DateTime(2025, 7, 8, 15, 42, 21, 288, DateTimeKind.Local).AddTicks(9041),
                             Email = "admin@admin.com",
                             Name = "Admin",
                             Password = "1224",

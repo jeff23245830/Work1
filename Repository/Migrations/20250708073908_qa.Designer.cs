@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
@@ -11,9 +12,11 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250708073908_qa")]
+    partial class qa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,13 +118,6 @@ namespace Repository.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAlready")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -147,9 +143,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CreateTime = new DateTime(2025, 7, 8, 15, 59, 46, 747, DateTimeKind.Local).AddTicks(9223),
-                            ImageUrl = "\\images\\1.jpg",
-                            IsAlready = true,
+                            CreateTime = new DateTime(2025, 7, 8, 15, 39, 7, 538, DateTimeKind.Local).AddTicks(8054),
                             Name = "好喝的水",
                             Price = 100,
                             Size = "大",
@@ -237,7 +231,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             Account = "admin@admin.com",
-                            CreatedTime = new DateTime(2025, 7, 8, 15, 59, 46, 747, DateTimeKind.Local).AddTicks(9201),
+                            CreatedTime = new DateTime(2025, 7, 8, 15, 39, 7, 538, DateTimeKind.Local).AddTicks(8031),
                             Email = "admin@admin.com",
                             Name = "Admin",
                             Password = "1224",

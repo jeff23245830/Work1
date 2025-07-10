@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 namespace ViewModel
 {
     public class ProductViewModel
@@ -32,5 +32,7 @@ namespace ViewModel
         public int TotalItems { get; set; } // 總項目數
 
         public List<Product> ProductList { get; set; }
+
+        public IEnumerable<SelectListItem> CategoryOptions { get; set; }
     }
 }

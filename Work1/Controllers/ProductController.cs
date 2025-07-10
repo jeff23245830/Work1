@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Service;
 using Service.Interfaces;
 using ViewModel;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Work1.Controllers
 {
@@ -34,18 +36,47 @@ namespace Work1.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(Guid Id)
         {
+            // 呼叫 ProductService 中的非同步方法來獲取類別列表
+            var categories = await _ProductService.GetCategoryListAsync() ;
+
+            var viewModel = new ProductViewModel();
+             
+
+            // **3. Populate the CategoryOptions for the dropdown**
+            // IMPORTANT: Replace 'Id' and 'Name' with the ACTUAL property names from your Repository.Entities.Category class
+            viewModel.CategoryOptions = categories.Select(c => new SelectListItem
+            {
+                Value = c.Id.ToString(),   // <--- CHANGE THIS (e.g., c.CategoryGuidId.ToString())
+                Text = c.Name             // <--- CHANGE THIS (e.g., c.CategoryDisplayName)
+            }).ToList();
 
             if (Id != Guid.Empty)
             {
-                var viewModel = await _ProductService.GetProductById(Id);
-                return View(viewModel);
+                var productToEdit = await _ProductService.GetProductById(Id); // 假設您有這個方法
+
+                if (productToEdit == null)
+                {
+                    return NotFound();
+                }
+
+                viewModel.Id = productToEdit.Id;
+                viewModel.Name = productToEdit.Name;
+                viewModel.CategoryId = productToEdit.CategoryId;
+                viewModel.ImageUrl = productToEdit.ImageUrl;
+                viewModel.Price = productToEdit.Price;
+                viewModel.Weight = productToEdit.Weight;
+                viewModel.Size = productToEdit.Size;
             }
-            return View();
+
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<ActionResult> Edit(ProductViewModel model ,IFormFile? file)
         {
+
+
+
             //上傳檔案_WebHostEnvironment時屬於意外 因為沒Services沒有IFormFile
             try
             {

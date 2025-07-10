@@ -115,5 +115,15 @@ namespace Service
             _IProductRepository.Delete(OldModel);
             await _IProductRepository.SaveChangesAsync();
         }
+
+        public async Task<List<Category>> GetCategoryListAsync()
+        {
+            var categoriesEnumerable = await _ICategoryRepository.GetAllAsync();
+            
+
+
+            return categoriesEnumerable.ToList();
+
+        }
     }
 }

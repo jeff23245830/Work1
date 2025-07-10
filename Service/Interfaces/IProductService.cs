@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,10 @@ namespace Service.Interfaces
 {
     public interface IProductService
     {
+
+
+        Task<List<Category>> GetCategoryListAsync();
+
         Task AddProduct(ProductViewModel model);
         Task DeletProductById(Guid id);
         Task UpdateProduct(ProductViewModel model);

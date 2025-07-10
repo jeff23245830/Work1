@@ -95,9 +95,18 @@ namespace Service
              
         }
 
-        public Task<ProductViewModel> UpdataProduct(ProductViewModel model)
+        public async Task UpdateProduct(ProductViewModel model)
         {
-            throw new NotImplementedException();
+            var OldModel = await _IProductRepository.GetByIdAsync(model.Id);
+            OldModel.Weight = model.Weight;
+            OldModel.Size = model.Size;
+            OldModel.Price = model.Price;
+            OldModel.CategoryId = new Guid("00000000-0000-0000-0000-000000000001");
+            OldModel.Name = model.Name;
+            OldModel.ImageUrl = model.ImageUrl;
+
+            _IProductRepository.Update(OldModel);
+            await _IProductRepository.SaveChangesAsync(); 
         }
 
         public async Task DeletProductById(Guid id)

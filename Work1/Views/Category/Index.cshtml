@@ -52,7 +52,11 @@
                 </td>
                 <td>
                     <a type="submit" class="btn btn-primary" asp-controller="Category" asp-action="Edit" asp-route-Id="@obj.Id"><i class="bi bi-pencil"></i> 修改</a>
-                            <a class="btn btn-danger" onclick="Delete('@Url.Action("Delete", "Category", new { id = obj.Id })')"><i class="bi bi-trash"></i> 刪除</a>
+                            @if (obj.Id != Guid.Parse("00000000-0000-0000-0000-000000000001"))
+                    {
+                        <a class="btn btn-danger" onclick="Delete('@Url.Action("Delete", "Category", new { id = obj.Id })')"><i class="bi bi-trash"></i> 刪除</a>
+                    }
+                           
                 </td>
             </tr>
         }  

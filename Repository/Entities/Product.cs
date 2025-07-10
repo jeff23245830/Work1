@@ -21,8 +21,7 @@ namespace Repository.Entities
         public string Size { get; set; }
         [Required]
         public int Weight { get; set; }
-        [Required]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

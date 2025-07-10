@@ -11,7 +11,7 @@ namespace Service.Interfaces
     {
         Task AddProduct(ProductViewModel model);
         Task DeletProductById(Guid id);
-        Task<ProductViewModel> UpdataProduct(ProductViewModel model);
+        Task UpdateProduct(ProductViewModel model);
         Task<ProductViewModel> GetProductById(Guid Id);
 
         Task<ProductViewModel> GetPagedProductssAsync(int pageNumber, int pageSize);

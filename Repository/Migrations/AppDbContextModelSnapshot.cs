@@ -44,62 +44,8 @@ namespace Repository.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Name = "第1個類別",
+                            Name = "預設類別",
                             OrderBy = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Name = "第2個類別",
-                            OrderBy = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Name = "第3個類別",
-                            OrderBy = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Name = "第4個類別",
-                            OrderBy = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Name = "第5個類別",
-                            OrderBy = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Name = "第6個類別",
-                            OrderBy = 6
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Name = "第7個類別",
-                            OrderBy = 7
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Name = "第8個類別",
-                            OrderBy = 8
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Name = "第9個類別",
-                            OrderBy = 9
-                        },
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Name = "第10個類別",
-                            OrderBy = 10
                         });
                 });
 
@@ -116,7 +62,6 @@ namespace Repository.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAlready")
@@ -147,8 +92,8 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CreateTime = new DateTime(2025, 7, 8, 15, 59, 46, 747, DateTimeKind.Local).AddTicks(9223),
-                            ImageUrl = "\\images\\1.jpg",
+                            CreateTime = new DateTime(2025, 7, 9, 23, 39, 1, 478, DateTimeKind.Local).AddTicks(8007),
+                            ImageUrl = "Images/Product/1.jpg",
                             IsAlready = true,
                             Name = "好喝的水",
                             Price = 100,
@@ -237,7 +182,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             Account = "admin@admin.com",
-                            CreatedTime = new DateTime(2025, 7, 8, 15, 59, 46, 747, DateTimeKind.Local).AddTicks(9201),
+                            CreatedTime = new DateTime(2025, 7, 9, 23, 39, 1, 478, DateTimeKind.Local).AddTicks(7984),
                             Email = "admin@admin.com",
                             Name = "Admin",
                             Password = "1224",

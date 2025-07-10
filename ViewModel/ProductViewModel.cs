@@ -19,8 +19,9 @@ namespace ViewModel
         public string Size { get; set; }
         [DisplayName("產品重量(KG)")]
         public int Weight { get; set; }
+
         [DisplayName("產品圖片")]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         
         public Guid CategoryId { get; set; }
         [DisplayName("產品類別")]

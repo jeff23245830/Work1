@@ -42,8 +42,22 @@
                                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Edit">新增類別</a></li>
                                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductList">產品列表</a></li>
                                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Edit">新增產品</a></li>
+                                 
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                影片
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDarkDropdownMenuLink"> 
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="VideoPlayer" asp-action="Upload">上傳影片</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="VideoPlayer" asp-action="Index">瀏覽影片</a></li>
+                            </ul>
+                        </li>
+
+
+
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>

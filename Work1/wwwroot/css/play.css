@@ -1,0 +1,125 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+#cont{
+    height: 100%;
+    opacity: 1; /* 初始顯示 */
+    transition: opacity 0.3s;
+    z-index: 1;
+}
+#cont:hover{
+    opacity: 1; /* 初始顯示 */
+}
+#Sound-sliderBACK{
+    position: relative;
+    width: 100px;
+    height: 20px;
+    right: 30px;
+    top: -9px;
+    background-color: #ffffff00;
+    opacity: 0; /* 初始隱藏 */
+    transition: opacity 0.3s;
+}
+#Back_btn {
+  position: absolute;
+  top: -9px;
+  width: 100px;
+  height: 20px;
+}
+
+input[type="range"]{
+  appearance: none;
+  border-radius:2px;
+  width:100px;
+  height:3px;
+  background-image:-webkit-linear-gradient(right ,rgb(255, 0, 221) 0%,rgb(234, 0, 255) 100%,#fff 100%, #fff 100%);
+  box-shadow:inset rgb(187, 213, 238) 0 0 5px;
+  outline : none;
+  
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width:10px;
+  height:10px;
+  background:#f22;
+  border-radius:50%;
+}
+
+#Sound-btn:hover + #Sound-sliderBACK,#Sound-sliderBACK:hover{
+    opacity: 1;
+}
+#mouse-tracker {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(133, 225, 255, 0);
+    position: absolute;
+    
+  }
+
+#video1 {
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  margin-bottom: 0px;
+}
+
+progress {
+  width: 100%;
+  bottom: 50px;
+  position: absolute;
+  appearance: none;
+  cursor: pointer;
+}
+::-webkit-progress-bar {
+    background-color: #41414142;
+}
+#progress-bar::-webkit-progress-bar {
+    background-color: #46464600;
+}
+#progress-bar::-webkit-progress-value {
+background-color: #ec5fff; 
+}
+#load-progress::-webkit-progress-value {
+background-color: #ffffff70; 
+}
+#Sound-progress::-webkit-progress-value{
+  background-color: #ff000070; 
+}
+button{
+  position: relative;
+  width: 80px; /* 按鈕寬度 */
+  height: 40px; /* 按鈕高度 */
+  background-color: #ffffff00; /* 按鈕背景色 */
+  border: none;
+  cursor: pointer;
+}
+h3{
+  color: #fff;
+}
+#Low_btn{
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  
+}
+#play-btn,#ris10-btn,#add10-btn{
+  left: 0px;
+}
+#full-btn{
+  float:right;
+  width: 80px;
+}
+#speed-btn{
+  float:right;
+}
+.speed-button{
+  float:right;
+  background-color: #41414142;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+

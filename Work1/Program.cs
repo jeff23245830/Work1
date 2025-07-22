@@ -19,9 +19,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 #region Repository µù¥U
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IVideoRepository, VideoRepository>();
 #endregion
 
 #region Service µù¥U
+builder.Services.AddScoped<IVideoService, VideoService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 #endregion

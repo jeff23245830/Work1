@@ -12,8 +12,8 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250709153901_11a23")]
-    partial class _11a23
+    [Migration("20250721135828_12222323")]
+    partial class _12222323
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,7 +95,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CreateTime = new DateTime(2025, 7, 9, 23, 39, 1, 478, DateTimeKind.Local).AddTicks(8007),
+                            CreateTime = new DateTime(2025, 7, 21, 21, 58, 28, 246, DateTimeKind.Local).AddTicks(2378),
                             ImageUrl = "Images/Product/1.jpg",
                             IsAlready = true,
                             Name = "好喝的水",
@@ -185,11 +185,46 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             Account = "admin@admin.com",
-                            CreatedTime = new DateTime(2025, 7, 9, 23, 39, 1, 478, DateTimeKind.Local).AddTicks(7984),
+                            CreatedTime = new DateTime(2025, 7, 21, 21, 58, 28, 246, DateTimeKind.Local).AddTicks(2353),
                             Email = "admin@admin.com",
                             Name = "Admin",
                             Password = "1224",
                             RoleId = new Guid("00000000-0000-0000-0000-000000000001")
+                        });
+                });
+
+            modelBuilder.Entity("Repository.Entities.Video", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("VideoUrl")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("introduce")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Videos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Name = "測試影片1",
+                            VideoUrl = "Video/Video/1.mp4",
+                            introduce = "介紹"
                         });
                 });
 

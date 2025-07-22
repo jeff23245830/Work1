@@ -1,13 +1,13 @@
 ﻿@{
     Layout = "_VideoCss";
 }
-
+@model ViewModel.VideoPlayViewModel
 
 <div>
 
     <div>
         <video id="video1">
-            <source src="~/Video/Video/Valorant_37.mp4" type="video/mp4">
+            <source src="/@Model.VideoUrl" type="video/mp4">
             你的瀏覽器不支援此影片的格式!
         </video>
     </div>

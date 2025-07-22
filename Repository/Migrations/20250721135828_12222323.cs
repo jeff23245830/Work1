@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class _12A : Migration
+    public partial class _12222323 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,6 +37,20 @@ namespace Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Videos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    introduce = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    VideoUrl = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Videos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,14 +117,19 @@ namespace Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Videos",
+                columns: new[] { "Id", "Name", "VideoUrl", "introduce" },
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), "測試影片1", "Video/Video/1.mp4", "介紹" });
+
+            migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "CategoryId", "CreateTime", "ImageUrl", "IsAlready", "Name", "Price", "Size", "Weight" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-000000000001"), new DateTime(2025, 7, 9, 23, 33, 51, 870, DateTimeKind.Local).AddTicks(5577), "/Images/Product/1.jpg", true, "好喝的水", 100, "大", 20 });
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-000000000001"), new DateTime(2025, 7, 21, 21, 58, 28, 246, DateTimeKind.Local).AddTicks(2378), "Images/Product/1.jpg", true, "好喝的水", 100, "大", 20 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Account", "CreatedTime", "Email", "Name", "Password", "RoleId" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), "admin@admin.com", new DateTime(2025, 7, 9, 23, 33, 51, 870, DateTimeKind.Local).AddTicks(5551), "admin@admin.com", "Admin", "1224", new Guid("00000000-0000-0000-0000-000000000001") });
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), "admin@admin.com", new DateTime(2025, 7, 21, 21, 58, 28, 246, DateTimeKind.Local).AddTicks(2353), "admin@admin.com", "Admin", "1224", new Guid("00000000-0000-0000-0000-000000000001") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -131,6 +150,9 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "Categories");

@@ -18,7 +18,7 @@ namespace Repository.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
-
+        public DbSet<Video> Videos { get; set; }
         public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -77,6 +77,17 @@ namespace Repository.Data
                     Name = "User",
                     Level = 3
                 }
+               );
+
+            modelBuilder.Entity<Video>().HasData(
+                new Video
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                    Name = "測試影片1",
+                    introduce = "介紹",
+                    VideoUrl = "Video/Video/1.mp4"
+
+                } 
                );
 
         }          

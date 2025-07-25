@@ -1,5 +1,149 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model ViewModel.VideoPlayViewModel
+<div class="container">
+    <form asp-action="Upload" enctype="multipart/form-data" asp-controller="VideoPlayer" method="post">
+        <div class="row pt-4 pb-3">
+
+            @if (Model == null) 
+            {
+                <div class="col-6">
+                    <h2 class="text-primary">
+                        新增影片
+                    </h2>
+                </div>
+            }
+            else
+            {
+                <div class="col-6">
+                    <h2 class="text-primary">
+                        修改影片
+                    </h2>
+                </div>
+
+                <div  class="mb-3">
+                    <label asp-for="Id" class="form-label"></label>
+                    <input asp-for="Id" class="form-control" aria-required="true" />
+                </div>
+
+            }
+
+        </div>
+        
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" aria-required="true" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="introduce" class="form-label"></label>
+            <input asp-for="introduce" class="form-control" aria-required="true" />
+        </div>
+
+         @if (Model == null)
+        {
+            <div class="mb-3">
+                <label asp-for="VideoUrl" class="p-0"></label>
+                <input type="file" name="file" asp-for="VideoUrl" class="form-control" accept="video/mp4" />
+            </div>
+        }
+        else
+        {
+            
+        }
+        <div class="col-12">
+            @if (Model == null)
+            {
+                <button type="submit" class="btn btn-primary">新增</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">修改</button>
+            }
+
+            <a class="btn btn-light" asp-controller="VideoPlayer" asp-action="Index">返回</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+@*
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 找到所有待處理的縮圖圖片元素
+            const thumbnailImages = document.querySelectorAll('.video-thumbnail');
+
+            thumbnailImages.forEach(imgElement => {
+                const videoUrl = imgElement.dataset.videoUrl; // 從 data-video-url 屬性取得影片 URL
+                const videoId = imgElement.id.replace('img-', ''); // 從 img 元素的 ID 解析出影片 ID
+
+                // 取得對應的 video 和 canvas 元素
+                const videoElement = document.getElementById(`video-${videoId}`);
+                const canvasElement = document.getElementById(`canvas-${videoId}`);
+
+                // 如果任何元素沒找到，或影片 URL 無效，則跳過
+                if (!videoElement || !canvasElement || !videoUrl || videoUrl.trim() === '') {
+                    console.warn(`Required elements or video URL not found for ID: ${videoId}`);
+                    // 可以設定一個錯誤或預設圖片
+                    imgElement.src = '~/Images/error_placeholder.jpg'; // 請確保這個圖片存在
+                    return;
+                }
+
+                const context = canvasElement.getContext('2d');
+
+                // 設置影片來源
+                videoElement.src = videoUrl;
+
+                // 監聽影片載入元資料完成事件
+                // 當影片的元資料 (例如尺寸、時長) 載入完成時觸發
+                videoElement.addEventListener('loadedmetadata', () => {
+                    // 設定 canvas 的尺寸與影片相同，以確保截圖比例正確
+                    canvasElement.width = videoElement.videoWidth;
+                    canvasElement.height = videoElement.videoHeight;
+
+                    // 嘗試跳轉到影片的某一秒 (例如第 2 秒)，作為縮圖的來源幀
+                    // 確保 currentTime 不超過影片總時長
+                    videoElement.currentTime = Math.min(2, videoElement.duration - 0.1); // -0.1 是為了避免跳到影片末尾的黑畫面
+                });
+
+                // 監聽影片跳轉完成事件 (當 currentTime 設定後，影片準備好該幀時觸發)
+                videoElement.addEventListener('seeked', () => {
+                    // 將影片的當前幀繪製到 canvas 上
+                    context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+                    // 將 canvas 內容轉換為圖片的 Data URL (例如 JPEG 格式)
+                    // 第二個參數 0.8 是品質參數 (0-1)，可以根據需要調整
+                    const dataURL = canvasElement.toDataURL('image/jpeg', 0.8);
+
+                    // 將 Data URL 設定為 img 標籤的 src
+                    imgElement.src = dataURL;
+
+                    // 為了節省資源，生成縮圖後將 video 和 canvas 元素從 DOM 中移除或清空 src
+                    // 這樣它們就不會持續佔用記憶體或載入影片數據
+                    videoElement.removeAttribute('src'); // 移除 src 停止載入
+                    videoElement.load(); // 重新載入，釋放資源
+                    videoElement.remove(); // 從 DOM 中移除 video 元素
+                    canvasElement.remove(); // 從 DOM 中移除 canvas 元素
+                }, { once: true }); // 使用 { once: true } 確保事件只觸發一次，避免重複處理
+
+                // 處理影片載入錯誤
+                videoElement.addEventListener('error', (e) => {
+                    console.error('Error loading video:', videoUrl, e);
+                    // 如果影片載入失敗，設定一個錯誤佔位圖片
+                    imgElement.src = '~/Images/error_placeholder.jpg'; // 請確保這個圖片存在
+                    videoElement.remove(); // 出錯也移除元素
+                    canvasElement.remove();
+                }, { once: true });
+
+                // 在 Chrome 等瀏覽器中，如果影片不是自動播放或靜音，可能需要 user gesture 才能載入
+                // 但是對於僅獲取 metadata 和縮圖，preload="metadata" 通常足夠。
+                // videoElement.load() 已經在 loadedmetadata 事件後被呼叫，所以這裡不需要重複呼叫。
+            });
+        });
+    </script>
+}
+*@

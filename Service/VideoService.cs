@@ -1,4 +1,6 @@
-﻿using Repository.Interfaces;
+﻿using Repository;
+using Repository.Entities;
+using Repository.Interfaces;
 using Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,22 @@ namespace Service
         public VideoService(IVideoRepository VideoRepository)
         {
             _VideoRepository = VideoRepository;
+        }
+
+        public async Task AddVideo(VideoPlayViewModel model)
+        {
+
+            var NewModel = new Video
+            {
+                Id = Guid.NewGuid(),
+                Name = model.Name,
+                introduce = model.introduce,
+                VideoUrl = model.VideoUrl
+
+            };
+
+            await _VideoRepository.AddAsync(NewModel);
+            await _VideoRepository.SaveChangesAsync();
         }
 
         public async Task<VideoPlayViewModel> GetIdtoVIdeo(Guid Id)
@@ -40,6 +58,18 @@ namespace Service
                 VideoList = allVideos.ToList()  
             }; 
             return viewModel; 
+        }
+
+        public async Task UpdateVideoIntro(VideoPlayViewModel model)
+        {
+            var onevideo = await _VideoRepository.GetByIdAsync(model.Id);
+            onevideo.Name = model.Name;
+            onevideo.introduce = model.introduce;
+
+            _VideoRepository.Update(onevideo);
+            await _VideoRepository.SaveChangesAsync();
+             
+
         }
     }
 }

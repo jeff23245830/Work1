@@ -85,7 +85,7 @@ namespace Repository.Data
                     Id = new Guid("00000000-0000-0000-0000-000000000001"),
                     Name = "測試影片1",
                     introduce = "介紹",
-                    VideoUrl = "Video/Video/1.mp4"
+                    VideoUrl = "Video/Videos/1.mp4"
 
                 } 
                );

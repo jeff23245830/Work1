@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.Data;
 
@@ -11,9 +12,11 @@ using Repository.Data;
 namespace Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250725084437_231")]
+    partial class _231
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,7 +95,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CreateTime = new DateTime(2025, 7, 25, 17, 6, 56, 710, DateTimeKind.Local).AddTicks(1478),
+                            CreateTime = new DateTime(2025, 7, 25, 16, 44, 36, 724, DateTimeKind.Local).AddTicks(9174),
                             ImageUrl = "Images/Product/1.jpg",
                             IsAlready = true,
                             Name = "好喝的水",
@@ -182,7 +185,7 @@ namespace Repository.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             Account = "admin@admin.com",
-                            CreatedTime = new DateTime(2025, 7, 25, 17, 6, 56, 710, DateTimeKind.Local).AddTicks(1451),
+                            CreatedTime = new DateTime(2025, 7, 25, 16, 44, 36, 724, DateTimeKind.Local).AddTicks(9110),
                             Email = "admin@admin.com",
                             Name = "Admin",
                             Password = "1224",
@@ -203,8 +206,8 @@ namespace Repository.Migrations
 
                     b.Property<string>("VideoUrl")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("introduce")
                         .IsRequired()

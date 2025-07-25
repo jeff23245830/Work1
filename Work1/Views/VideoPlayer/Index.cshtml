@@ -24,10 +24,10 @@
                         <video id="video-@obj.Id" preload="metadata"  crossorigin="anonymous" style="display:none;"></video>
                         <canvas id="canvas-@obj.Id" style="display:none;"></canvas>
                         <div class="card-body">
-                            <h5 class="card-title">@obj.Name</h5>
+                            <h5 class="card-title">@obj.Name</h5> 
                             <p class="card-text">@obj.introduce</p>
                             <a asp-controller="VideoPlayer" asp-action="PlayVIdeo" asp-route-Id="@obj.Id" class="btn btn-primary">觀看影片</a>
-
+                            <a asp-controller="VideoPlayer" asp-action="Upload" asp-route-Id="@obj.Id" class="btn btn-primary">修改標題</a>
                         </div>
                     </div>
                 </div>

@@ -26,7 +26,7 @@ namespace Repository.Entities
 
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(500)]
         public string? VideoUrl { get; set; }
     }
 }

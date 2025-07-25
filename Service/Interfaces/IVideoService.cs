@@ -10,8 +10,8 @@ namespace Service.Interfaces
     public interface IVideoService
     {
         Task<VideoPlayViewModel> GetVideoList();
-
-
+        Task UpdateVideoIntro(VideoPlayViewModel model);
+        Task AddVideo(VideoPlayViewModel model);
         Task<VideoPlayViewModel> GetIdtoVIdeo(Guid Id);
     }
 }
